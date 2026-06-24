@@ -119,3 +119,48 @@ Resultado esperado:
 
 Vuelve al terminal del servidor y pulsa `Ctrl+C`.
 
+## Punto de reanudación: 24 de junio de 2026
+
+Se completó el siguiente recorrido práctico:
+
+- El sensor REST respondió con temperatura, CO₂, fecha y estado.
+- Se comprobó la diferencia entre `online` y `offline`.
+- BIMROCKET se ejecutó localmente en `http://127.0.0.1:8000/app.html`.
+- Se creó una caja y se renombró como `Sala_A-101`.
+- Se añadió un `RestPollController` con nombre automático `ctr_0`.
+- Se conectó correctamente con
+  `http://127.0.0.1:8001/api/rooms/A-101`.
+- `output` y `jsonOutput` comenzaron a recibir las lecturas.
+
+### Detalles de interfaz aprendidos
+
+- Los cambios de texto o números se confirman pulsando `Enter`.
+- Si el nombre del controlador se deja vacío, BIMROCKET genera `ctr_0`.
+- `started` es un indicador de solo lectura.
+- Para iniciar un controlador individual se utiliza el menú contextual de su
+  encabezado, no el de una propiedad.
+
+### Cómo continuar
+
+1. Iniciar el sensor:
+
+   ```powershell
+   cd C:\Users\josez\bimrocket-iot-learning\examples\mock-sensor
+   python server.py
+   ```
+
+2. Iniciar BIMROCKET:
+
+   ```powershell
+   cd C:\Users\josez\bimrocket\bimrocket-webapp\src\main\webapp
+   python -m http.server 8000 --bind 127.0.0.1
+   ```
+
+3. Abrir `http://127.0.0.1:8000/app.html` y cargar, si se guardó, el archivo
+   `lab-01-sensor-rest.brf`.
+
+4. Añadir un `DisplayController` cuya entrada proceda de:
+
+   ```javascript
+   object.controllers.ctr_0.jsonOutput.co2
+   ```
