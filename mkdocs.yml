@@ -52,6 +52,7 @@ nav:
   - Integración real:
       - Índice: 05-integracion-real/index.md
   - Glosario: glossary.md
+  - Progreso:
+      - "2026-06-24 — Lección 1": progreso/2026-06-24-leccion-1.md
   - Preguntas: questions.md
   - Plantilla de lección: plantillas/leccion.md
-
