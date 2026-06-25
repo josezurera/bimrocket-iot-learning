@@ -36,12 +36,16 @@ flowchart LR
     Sigue el [itinerario](roadmap.md), realiza los laboratorios y utiliza el
     buscador o el [glosario](glossary.md) cuando necesites recuperar un concepto.
 
+!!! tip "Retomar el curso desde otro equipo"
+    Empieza por [Continuar en otro equipo](00-empezar/continuar-en-otro-equipo.md)
+    y consulta el [estado actual](progreso/estado-actual.md) para saber
+    exactamente por dónde seguir.
+
 ## Estado actual
 
 - [x] Estructura inicial de la documentación.
 - [x] Mapa conceptual de la integración IoT.
 - [x] Lección 1 preparada.
-- [ ] Primer sensor REST simulado.
+- [x] Primer sensor REST simulado.
 - [ ] Modelo IFC conectado.
 - [ ] Integración bidireccional con Brain4it.
-
