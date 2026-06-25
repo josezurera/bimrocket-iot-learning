@@ -46,6 +46,21 @@ Estado del laboratorio donde la sala ya tiene identidad BIM/IoT:
 Este archivo es el mejor punto de partida para aprender a escalar el ejemplo a
 varias salas.
 
+### `lab-03-dos-salas-iot.brf`
+
+Estado con dos salas conectadas al sensor:
+
+- grupo raíz `Edificio_Demo`;
+- sala `Sala_A-101` con `userData.room = "A-101"`;
+- sala `Sala_A-102` con `userData.room = "A-102"`;
+- cada sala tiene su propio `RestPollController`, `DisplayController` y
+  `ColorController`;
+- ambas usan el mismo patrón de URL dinámica:
+
+  ```javascript
+  "http://127.0.0.1:8001/api/rooms/" + object.userData.room
+  ```
+
 ## Cómo usarlos
 
 1. Arranca el sensor:

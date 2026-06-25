@@ -65,6 +65,15 @@ http://127.0.0.1:8001/api/rooms/A-103
 Si el sensor estaba arrancado antes de este cambio, hay que reiniciarlo para que
 reconozca `A-102` y `A-103`.
 
+También se ha preparado un modelo BIMROCKET con dos salas:
+
+```text
+examples/bimrocket-models/lab-03-dos-salas-iot.brf
+```
+
+Este modelo permite comprobar que la misma fórmula de URL dinámica funciona en
+dos objetos BIM distintos.
+
 ## Nombre real del controlador usado
 
 El controlador quedó con nombre automático:
@@ -104,6 +113,7 @@ Ver:
 docs/progreso/2026-06-25-restpoll-formulas-display.md
 docs/progreso/2026-06-25-identidad-bim-iot.md
 docs/progreso/2026-06-25-api-multisala.md
+docs/progreso/2026-06-25-dos-salas-iot.md
 ```
 
 ## Comandos para reanudar
@@ -136,6 +146,7 @@ Los modelos del laboratorio ya están versionados en GitHub:
 examples/bimrocket-models/lab-01-sensor-rest.brf
 examples/bimrocket-models/lab-01-co2-display-color-offline.brf
 examples/bimrocket-models/lab-02-identidad-dinamica-url.brf
+examples/bimrocket-models/lab-03-dos-salas-iot.brf
 ```
 
 Para continuar desde otro equipo, clona el repositorio, arranca el sensor y
@@ -144,5 +155,5 @@ BIMROCKET, y abre el `.brf` correspondiente desde **Abrir del disco local**.
 El mejor punto de partida actual es:
 
 ```text
-examples/bimrocket-models/lab-02-identidad-dinamica-url.brf
+examples/bimrocket-models/lab-03-dos-salas-iot.brf
 ```
