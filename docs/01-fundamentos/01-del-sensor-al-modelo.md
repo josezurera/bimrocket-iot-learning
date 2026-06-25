@@ -5,7 +5,7 @@ tags:
   - sensor
   - controlador
   - rest
-status: en-progreso
+status: completada
 ---
 
 # Lección 1: del sensor al modelo
@@ -82,6 +82,18 @@ Antes del laboratorio debemos poder responder:
 3. ¿Qué pieza relaciona la salida REST con el color?
 4. ¿Cambiar el color modifica el valor físico del sensor?
 
+## Conclusiones
+
+- El campo `room` puede identificar la sala y `co2` contiene la medición.
+- Un `ifcGlobalId` es más fiable que un nombre porque identifica de manera
+  única al objeto IFC.
+- Con un intervalo de *polling* de 10 segundos, el retraso máximo esperado es
+  aproximadamente de 10 segundos.
+- Una misma lectura puede alimentar varios controladores sin repetir la
+  consulta a la API.
+- Un valor antiguo procedente de un sensor desconectado debe representarse
+  como estado desconocido, no como una medición actual válida.
+
 ## Siguiente paso
 
 En el primer laboratorio construiremos una API local que simule temperatura y
@@ -93,4 +105,3 @@ CO₂. Después conectaremos BIMROCKET a esa API sin utilizar todavía hardware.
 - [`RestPollController.js`](https://github.com/bimrocket/bimrocket/blob/bc04faafd3b1bf3f53ad004a73241325bd30d237/bimrocket-webapp/src/main/webapp/js/controllers/RestPollController.js)
 - [`ColorController.js`](https://github.com/bimrocket/bimrocket/blob/bc04faafd3b1bf3f53ad004a73241325bd30d237/bimrocket-webapp/src/main/webapp/js/controllers/ColorController.js)
 - [`Formula.js`](https://github.com/bimrocket/bimrocket/blob/bc04faafd3b1bf3f53ad004a73241325bd30d237/bimrocket-webapp/src/main/webapp/js/formula/Formula.js)
-
