@@ -47,6 +47,7 @@ nav:
       - Arquitectura IoT: 02-bimrocket/arquitectura-iot.md
   - Laboratorios:
       - Índice: 03-laboratorios/index.md
+      - "Laboratorio 1: sensor REST simulado": 03-laboratorios/01-sensor-rest-simulado.md
   - Código fuente:
       - Mapa de clases: 04-codigo-fuente/mapa-de-clases.md
   - Integración real:
