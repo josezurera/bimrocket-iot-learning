@@ -118,6 +118,12 @@ http://127.0.0.1:8000/app.html
 
 ## Nota sobre el archivo del modelo
 
-Si existe un archivo `.brf` guardado del laboratorio, se puede cargar y continuar
-desde ahí. Si no existe, el estado mínimo se recrea en pocos pasos siguiendo
-`Continuar en otro equipo`.
+Los modelos del laboratorio ya están versionados en GitHub:
+
+```text
+examples/bimrocket-models/lab-01-sensor-rest.brf
+examples/bimrocket-models/lab-01-co2-display-color-offline.brf
+```
+
+Para continuar desde otro equipo, clona el repositorio, arranca el sensor y
+BIMROCKET, y abre el `.brf` correspondiente desde **Abrir del disco local**.

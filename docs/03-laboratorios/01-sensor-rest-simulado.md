@@ -221,3 +221,16 @@ Panel visual mostrando el CO₂ de la sala en ppm.
 
 El siguiente paso será usar el CO₂ para colorear la sala con un
 `ColorController`.
+
+## Modelos guardados
+
+Los modelos `.brf` de este laboratorio están disponibles en el repositorio:
+
+```text
+examples/bimrocket-models/lab-01-sensor-rest.brf
+examples/bimrocket-models/lab-01-co2-display-color-offline.brf
+```
+
+El primero contiene el estado base con `RestPollController`. El segundo contiene
+la versión completa con `DisplayController`, `ColorController` y lógica de
+estado `offline`.
