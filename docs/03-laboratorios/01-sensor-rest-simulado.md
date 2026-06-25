@@ -222,6 +222,40 @@ Panel visual mostrando el CO₂ de la sala en ppm.
 El siguiente paso será usar el CO₂ para colorear la sala con un
 `ColorController`.
 
+## Ampliación: sensor con varias salas
+
+Desde el 25 de junio de 2026, el sensor simulado conoce tres salas:
+
+```text
+A-101
+A-102
+A-103
+```
+
+Puedes consultar la lista completa con:
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8001/api/rooms
+```
+
+Y puedes pedir lecturas de cada sala:
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8001/api/rooms/A-101
+Invoke-RestMethod http://127.0.0.1:8001/api/rooms/A-102
+Invoke-RestMethod http://127.0.0.1:8001/api/rooms/A-103
+```
+
+Cada sala devuelve su propio `room`, su propio `ifcGlobalId` y una simulación
+ligeramente distinta.
+
+Esta ampliación prepara el siguiente paso en BIMROCKET: crear varias salas y
+construir la URL del sensor con:
+
+```javascript
+"http://127.0.0.1:8001/api/rooms/" + object.userData.room
+```
+
 ## Modelos guardados
 
 Los modelos `.brf` de este laboratorio están disponibles en el repositorio:

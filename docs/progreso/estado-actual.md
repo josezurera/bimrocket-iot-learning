@@ -54,6 +54,17 @@ Además de mostrar y colorear el CO₂, ya se ha preparado el siguiente patrón:
 Esto permite pasar de una prueba con una sala a un patrón reutilizable para
 varias salas.
 
+La API simulada también se ha ampliado para soportar varias salas:
+
+```text
+http://127.0.0.1:8001/api/rooms/A-101
+http://127.0.0.1:8001/api/rooms/A-102
+http://127.0.0.1:8001/api/rooms/A-103
+```
+
+Si el sensor estaba arrancado antes de este cambio, hay que reiniciarlo para que
+reconozca `A-102` y `A-103`.
+
 ## Nombre real del controlador usado
 
 El controlador quedó con nombre automático:
@@ -92,6 +103,7 @@ Ver:
 ```text
 docs/progreso/2026-06-25-restpoll-formulas-display.md
 docs/progreso/2026-06-25-identidad-bim-iot.md
+docs/progreso/2026-06-25-api-multisala.md
 ```
 
 ## Comandos para reanudar
