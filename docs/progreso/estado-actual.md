@@ -29,7 +29,11 @@ Se consiguió:
   http://127.0.0.1:8001/api/rooms/A-101
   ```
 
-- recibir datos en `output` y `jsonOutput`.
+- recibir datos en `output` y `jsonOutput`;
+- añadir un `DisplayController` como `ctr_1`;
+- crear fórmulas para conectar `ctr_0.jsonOutput.co2` con
+  `ctr_1.input`;
+- mostrar el CO₂ en un panel visual como `ppm`.
 
 ## Nombre real del controlador usado
 
@@ -50,18 +54,45 @@ por el nombre real que aparezca en el inspector.
 
 ## Siguiente paso
 
-Añadir un `DisplayController` al mismo objeto y alimentar su entrada con:
+Usar el valor de CO₂ para colorear la sala.
+
+La conexión visual ya conseguida fue:
 
 ```javascript
 object.controllers.ctr_0.jsonOutput.co2
 ```
 
+con destino:
+
+```text
+controllers.ctr_1.input
+```
+
 Objetivo del siguiente tramo:
 
-- comprobar que el valor de CO₂ ya no solo llega al inspector;
-- mostrarlo visualmente en el modelo;
-- preparar después una regla de color para distinguir aire correcto, advertencia
-  y alarma.
+- añadir un `ColorController`;
+- definir una regla de color para distinguir aire correcto, advertencia y
+  alarma;
+- decidir cómo representar el estado `offline`.
+
+## Conceptos aclarados
+
+La sesión del 25 de junio de 2026 dejó documentados estos conceptos:
+
+- qué es `RestPollController`;
+- por qué se usa para consultar APIs REST de IoT;
+- qué diferencia hay entre `output` y `jsonOutput`;
+- qué significa `object` en una fórmula;
+- qué significa el punto `.` como acceso a propiedades;
+- qué diferencia hay entre `path` y `expression`;
+- por qué los textos llevan comillas y los números no;
+- por qué puede ser necesario pulsar `Reconstruir` para evaluar fórmulas.
+
+Ver:
+
+```text
+docs/progreso/2026-06-25-restpoll-formulas-display.md
+```
 
 ## Comandos para reanudar
 

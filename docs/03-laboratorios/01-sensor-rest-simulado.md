@@ -164,3 +164,60 @@ Se completó el siguiente recorrido práctico:
    ```javascript
    object.controllers.ctr_0.jsonOutput.co2
    ```
+
+## Punto de reanudación: 25 de junio de 2026
+
+Se completó la conexión entre el `RestPollController` y un
+`DisplayController`.
+
+Controladores usados:
+
+```text
+ctr_0 = RestPollController
+ctr_1 = DisplayController
+```
+
+Fórmulas creadas:
+
+```text
+controllers.ctr_1.input
+```
+
+```javascript
+object.controllers.ctr_0.jsonOutput.co2
+```
+
+```text
+controllers.ctr_1.units
+```
+
+```javascript
+"ppm"
+```
+
+```text
+controllers.ctr_1.decimals
+```
+
+```javascript
+0
+```
+
+Aprendizaje importante:
+
+- el menú contextual de fórmulas debe abrirse dentro del panel inferior del
+  inspector;
+- `path` es la propiedad destino;
+- `expression` es el valor o cálculo de origen;
+- `RestPollController` guarda el JSON parseado en `jsonOutput`;
+- `DisplayController` muestra el valor que recibe en `input`;
+- puede ser necesario pulsar `Reconstruir` para evaluar todas las fórmulas.
+
+Resultado conseguido:
+
+```text
+Panel visual mostrando el CO₂ de la sala en ppm.
+```
+
+El siguiente paso será usar el CO₂ para colorear la sala con un
+`ColorController`.
