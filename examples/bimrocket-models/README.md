@@ -31,6 +31,21 @@ Estado completo del laboratorio de CO₂:
 - color de sala según CO₂;
 - color gris cuando `status` es `offline`.
 
+### `lab-02-identidad-dinamica-url.brf`
+
+Estado del laboratorio donde la sala ya tiene identidad BIM/IoT:
+
+- `userData.room = "A-101"`;
+- `userData.ifcGlobalId = "DEMO_IFC_GLOBAL_ID_A101"`;
+- la URL de `ctr_0` se construye con una fórmula:
+
+  ```javascript
+  "http://127.0.0.1:8001/api/rooms/" + object.userData.room
+  ```
+
+Este archivo es el mejor punto de partida para aprender a escalar el ejemplo a
+varias salas.
+
 ## Cómo usarlos
 
 1. Arranca el sensor:
@@ -55,4 +70,3 @@ Estado completo del laboratorio de CO₂:
 
 5. Si los controladores no arrancan automáticamente, ve al inspector de la sala
    y arráncalos desde el menú contextual.
-

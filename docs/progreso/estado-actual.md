@@ -33,7 +33,26 @@ Se consiguió:
 - añadir un `DisplayController` como `ctr_1`;
 - crear fórmulas para conectar `ctr_0.jsonOutput.co2` con
   `ctr_1.input`;
-- mostrar el CO₂ en un panel visual como `ppm`.
+- mostrar el CO₂ en un panel visual como `ppm`;
+- añadir un `ColorController`;
+- colorear la sala según el CO₂;
+- representar el estado `offline` con color gris.
+
+## Punto actual
+
+Además de mostrar y colorear el CO₂, ya se ha preparado el siguiente patrón:
+
+- la sala tiene identidad propia en `userData`;
+- `userData.room` vale `A-101`;
+- `userData.ifcGlobalId` vale `DEMO_IFC_GLOBAL_ID_A101`;
+- la URL de `RestPollController` puede construirse desde esa identidad:
+
+  ```javascript
+  "http://127.0.0.1:8001/api/rooms/" + object.userData.room
+  ```
+
+Esto permite pasar de una prueba con una sala a un patrón reutilizable para
+varias salas.
 
 ## Nombre real del controlador usado
 
@@ -52,29 +71,6 @@ object.controllers.ctr_0.jsonOutput.co2
 Si en otro intento el controlador se llama de otra manera, sustituye `ctr_0`
 por el nombre real que aparezca en el inspector.
 
-## Siguiente paso
-
-Usar el valor de CO₂ para colorear la sala.
-
-La conexión visual ya conseguida fue:
-
-```javascript
-object.controllers.ctr_0.jsonOutput.co2
-```
-
-con destino:
-
-```text
-controllers.ctr_1.input
-```
-
-Objetivo del siguiente tramo:
-
-- añadir un `ColorController`;
-- definir una regla de color para distinguir aire correcto, advertencia y
-  alarma;
-- decidir cómo representar el estado `offline`.
-
 ## Conceptos aclarados
 
 La sesión del 25 de junio de 2026 dejó documentados estos conceptos:
@@ -86,12 +82,16 @@ La sesión del 25 de junio de 2026 dejó documentados estos conceptos:
 - qué significa el punto `.` como acceso a propiedades;
 - qué diferencia hay entre `path` y `expression`;
 - por qué los textos llevan comillas y los números no;
+- qué hace `.set(...)` al cambiar un color;
+- qué es `userData`;
+- por qué conviene construir la URL del sensor desde la identidad de la sala;
 - por qué puede ser necesario pulsar `Reconstruir` para evaluar fórmulas.
 
 Ver:
 
 ```text
 docs/progreso/2026-06-25-restpoll-formulas-display.md
+docs/progreso/2026-06-25-identidad-bim-iot.md
 ```
 
 ## Comandos para reanudar
@@ -116,14 +116,21 @@ Navegador:
 http://127.0.0.1:8000/app.html
 ```
 
-## Nota sobre el archivo del modelo
+## Archivos del modelo
 
 Los modelos del laboratorio ya están versionados en GitHub:
 
 ```text
 examples/bimrocket-models/lab-01-sensor-rest.brf
 examples/bimrocket-models/lab-01-co2-display-color-offline.brf
+examples/bimrocket-models/lab-02-identidad-dinamica-url.brf
 ```
 
 Para continuar desde otro equipo, clona el repositorio, arranca el sensor y
 BIMROCKET, y abre el `.brf` correspondiente desde **Abrir del disco local**.
+
+El mejor punto de partida actual es:
+
+```text
+examples/bimrocket-models/lab-02-identidad-dinamica-url.brf
+```

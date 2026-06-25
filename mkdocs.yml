@@ -59,5 +59,6 @@ nav:
       - Estado actual: progreso/estado-actual.md
       - "2026-06-24 — Lección 1": progreso/2026-06-24-leccion-1.md
       - "2026-06-25 — RestPollController, fórmulas y DisplayController": progreso/2026-06-25-restpoll-formulas-display.md
+      - "2026-06-25 — Identidad BIM y URL dinámica": progreso/2026-06-25-identidad-bim-iot.md
   - Preguntas: questions.md
   - Plantilla de lección: plantillas/leccion.md
