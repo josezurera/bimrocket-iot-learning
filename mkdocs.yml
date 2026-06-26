@@ -45,6 +45,7 @@ nav:
   - Itinerario: roadmap.md
   - Fundamentos:
       - "Lección 1: del sensor al modelo": 01-fundamentos/01-del-sensor-al-modelo.md
+      - "Resumen lección 1": 01-fundamentos/resumen-leccion-1.md
   - BIMROCKET:
       - Arquitectura IoT: 02-bimrocket/arquitectura-iot.md
   - Laboratorios:
