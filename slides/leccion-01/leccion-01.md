@@ -31,18 +31,20 @@ sensor/API → dato JSON → objeto BIM → visualización → validación
 
 # Qué vas a construir
 
-![bg right:55% contain](images/bimrocket-dos-salas.png)
+![bg right:55% contain](images/bimrocket-a102-userdata.png)
 
-- API REST simulada con varias salas.
-- Modelo BIMROCKET con `Sala_A-101` y `Sala_A-102`.
-- Panel de CO₂ por sala.
-- Color por CO₂, offline e identidad incorrecta.
+- Una API REST simulada con varias salas.
+- Dos objetos BIM: `Sala_A-101` y `Sala_A-102`.
+- Un panel de CO₂ por sala.
+- Color automático según CO₂, sensor offline o identidad incorrecta.
 
 ---
 
 # El sensor devuelve JSON
 
 ![w:1150](images/api-a102.svg)
+
+Este JSON es la “lectura viva” que BIMROCKET va a consumir.
 
 ---
 
@@ -61,16 +63,79 @@ La clave es saber **a qué objeto BIM pertenecen**.
 
 ---
 
-# Cada sala sabe quién es
+# A-101: el objeto sabe quién es
+
+![bg right:38% contain](images/detail-a101-userdata.png)
+
+En el esquema está seleccionada `Sala_A-101`.
+
+En el inspector, pestaña de propiedades, vemos:
 
 ```text
-Sala_A-102
-├── userData.room = A-102
-└── userData.ifcGlobalId = DEMO_IFC_GLOBAL_ID_A102
+room = A-101
+ifcGlobalId = DEMO_IFC_GLOBAL_ID_A101
 ```
 
-`room` identifica la sala para la API.  
-`ifcGlobalId` representa el identificador BIM/IFC.
+Ese `room` será el identificador usado para pedir datos a la API.
+
+---
+
+# A-102: misma lógica, otro objeto
+
+![bg right:38% contain](images/detail-a102-userdata.png)
+
+Ahora está seleccionada `Sala_A-102`.
+
+La estructura es la misma, pero los valores cambian:
+
+```text
+room = A-102
+ifcGlobalId = DEMO_IFC_GLOBAL_ID_A102
+```
+
+Esto permite reutilizar reglas sin duplicar lógica a mano.
+
+---
+
+<!-- _class: section-title -->
+
+# Leer datos desde la API
+
+BIMROCKET pregunta cada cierto tiempo a una URL y recibe la respuesta JSON.
+
+---
+
+# RestPollController en A-101
+
+![bg right:40% contain](images/detail-a101-restpoll.png)
+
+En `Sala_A-101`, el controlador REST consulta:
+
+```text
+http://127.0.0.1:8001/api/rooms/A-101
+```
+
+El campo `output` muestra la respuesta recibida:
+
+```text
+room, ifcGlobalId, temperature, co2, timestamp, status
+```
+
+---
+
+# RestPollController en A-102
+
+![bg right:40% contain](images/detail-a102-restpoll.png)
+
+En `Sala_A-102`, el mismo controlador consulta:
+
+```text
+http://127.0.0.1:8001/api/rooms/A-102
+```
+
+La idea importante:
+
+> cada objeto BIM pregunta por su propio dato.
 
 ---
 
@@ -78,29 +143,69 @@ Sala_A-102
 
 ![w:1200](images/formula-url.svg)
 
+La fórmula une texto fijo con la sala actual:
+
+```javascript
+"http://127.0.0.1:8001/api/rooms/" + object.userData.room
+```
+
+---
+
+# Fórmula en BIMROCKET
+
+![bg right:40% contain](images/detail-a102-formulas.png)
+
+Aquí está seleccionada `Sala_A-102` y está abierta la pestaña de Fórmulas.
+
+La URL no está escrita como `A-102` fijo.
+
+Usa:
+
+```javascript
+object.userData.room
+```
+
+La misma fórmula sirve para `A-101` y `A-102`.
+
+---
+
+<!-- _class: section-title -->
+
+# Mostrar el CO₂
+
+Leer el dato no basta.  
+Tenemos que convertirlo en información visible para el usuario.
+
 ---
 
 # Fórmula para mostrar CO₂
 
-Path:
+![bg right:40% contain](images/detail-a101-formulas.png)
 
-```text
-controllers.ctr_1.input
-```
-
-Expression:
+En `Sala_A-101`, el `DisplayController` toma el CO₂ del JSON:
 
 ```javascript
 object.controllers.ctr_0.jsonOutput.co2
 ```
 
-El `DisplayController` muestra el CO₂ recibido por `RestPollController`.
+Traducción:
+
+> del resultado recibido por REST, usa el campo `co2`.
 
 ---
 
-# En BIMROCKET: fórmulas
+# Resultado visible
 
-![w:1120](images/bimrocket-formulas.png)
+![bg right:55% contain](images/bimrocket-a101-restpoll.png)
+
+El panel inferior muestra:
+
+```text
+CO2 A-101
+770 ppm
+```
+
+La sala ya no es solo geometría: ahora enseña un dato vivo.
 
 ---
 
@@ -116,17 +221,32 @@ Un dato puede llegar, pero no pertenecer al objeto correcto.
 
 ![w:1200](images/formula-iotmatch.svg)
 
+`iotMatch` responde a una pregunta muy concreta:
+
+> ¿la sala del objeto coincide con la sala que viene en el JSON?
+
 ---
 
-# En BIMROCKET: userData
+# iotMatch en A-102
 
-![w:1120](images/bimrocket-userdata.png)
+![bg right:40% contain](images/detail-a102-formulas.png)
+
+En la pestaña de Fórmulas se ve la comparación:
+
+```javascript
+object.userData.room === object.controllers.ctr_0.jsonOutput.room
+```
+
+Si ambas partes coinciden, el dato es confiable para esa sala.
 
 ---
 
 # Estados visuales
 
 ![w:1250](images/estados-visuales.svg)
+
+La sala no solo muestra valores.  
+También comunica estado y confianza mediante color.
 
 ---
 
@@ -165,19 +285,27 @@ Hay que probar cada estado.
 
 # Prueba 1 — Caso normal
 
+![bg right:45% contain](images/detail-a102-restpoll.png)
+
+En el controlador REST vemos:
+
 ```text
 status = online
+room = A-102
+```
+
+Resultado:
+
+```text
 iotMatch = true
 color = según CO₂
 ```
-
-Resultado: la sala usa la escala verde → rojo.
 
 ---
 
 # Prueba 2 — Sensor offline
 
-URL temporal:
+URL temporal usada:
 
 ```javascript
 "http://127.0.0.1:8001/api/rooms/" + object.userData.room + "?offline=1"
@@ -191,11 +319,13 @@ iotMatch = true
 color = gris
 ```
 
+Esta prueba comprueba disponibilidad del sensor.
+
 ---
 
 # Prueba 3 — Identidad incorrecta
 
-Fórmula temporal:
+Fórmula temporal usada:
 
 ```javascript
 "A-999" === object.controllers.ctr_0.jsonOutput.room
@@ -207,6 +337,8 @@ Resultado esperado:
 iotMatch = false
 color = morado
 ```
+
+Esta prueba comprueba confianza del dato.
 
 ---
 
