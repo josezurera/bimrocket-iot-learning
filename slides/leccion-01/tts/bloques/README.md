@@ -48,13 +48,13 @@ Desde la raíz del repositorio:
 ```powershell
 cd C:\Users\josez\bimrocket-iot-learning
 $env:GEMINI_API_KEY="TU_API_KEY"
-python scripts/generate_tts_gemini.py
+.\scripts\generate-lesson1-tts.ps1
 ```
 
 Para regenerar solo un bloque:
 
 ```powershell
-python scripts/generate_tts_gemini.py --only 01 --force
+.\scripts\generate-lesson1-tts.ps1 -Only 01 -Force
 ```
 
 La API key se lee desde la variable de entorno local `GEMINI_API_KEY`.  
