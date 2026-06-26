@@ -8,7 +8,7 @@ tags:
 
 # Estado actual del curso
 
-Última actualización: 25 de junio de 2026.
+Última actualización: 26 de junio de 2026.
 
 ## Punto alcanzado
 
@@ -74,6 +74,22 @@ examples/bimrocket-models/lab-03-dos-salas-iot.brf
 Este modelo permite comprobar que la misma fórmula de URL dinámica funciona en
 dos objetos BIM distintos.
 
+El avance más reciente fue añadir una validación de identidad IoT:
+
+```javascript
+object.userData.room === object.controllers.ctr_0.jsonOutput.room
+```
+
+El resultado se guarda en:
+
+```text
+userData.iotMatch
+```
+
+Si `iotMatch` vale `true`, el dato recibido pertenece a la sala seleccionada.
+Si vale `false`, llega un dato que no coincide con la identidad esperada del
+objeto BIM.
+
 ## Nombre real del controlador usado
 
 El controlador quedó con nombre automático:
@@ -114,6 +130,7 @@ docs/progreso/2026-06-25-restpoll-formulas-display.md
 docs/progreso/2026-06-25-identidad-bim-iot.md
 docs/progreso/2026-06-25-api-multisala.md
 docs/progreso/2026-06-25-dos-salas-iot.md
+docs/progreso/2026-06-26-validacion-identidad-iot.md
 ```
 
 ## Comandos para reanudar
