@@ -1,0 +1,12 @@
+Bienvenido a esta primera lección de BIMROCKET más IoT.
+
+En esta clase vamos a construir el primer flujo completo: desde una lectura de sensor simulada hasta una sala BIM que muestra, colorea y valida ese dato.
+
+No hace falta que tengas todavía una placa real conectada. Para aprender bien el proceso, vamos a empezar con una API REST simulada. Así nos centramos en lo importante: cómo viaja el dato y cómo lo interpreta el modelo.
+
+El objetivo es entender este camino: sensor, dato JSON, objeto BIM, visualización y validación.
+
+Fíjate en que no hablamos solo de ver un número en pantalla. La gracia está en que ese número llegue al objeto correcto y que el modelo pueda reaccionar.
+
+Esa es la base de un gemelo digital: geometría, identidad, datos vivos y reglas de confianza.
+
