@@ -19,6 +19,7 @@ Validar si la voz sirve para un curso técnico monetizable:
 - `prompt-voz.md`: descripción de la voz deseada.
 - `audio/`: carpeta prevista para guardar audios exportados.
 - `evaluaciones/`: fichas de evaluación por voz probada.
+- `bloques/`: textos divididos en bloques de 5 diapositivas para generar audio con Algieba.
 
 ## Muestras generadas
 

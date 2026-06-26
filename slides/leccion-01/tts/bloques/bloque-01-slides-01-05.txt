@@ -1,0 +1,36 @@
+Bienvenido a esta primera lección de BIMROCKET más IoT.
+
+En esta clase vamos a construir el primer flujo completo: desde una lectura de sensor simulada hasta una sala BIM que muestra, colorea y valida ese dato.
+
+No hace falta que tengas todavía una placa real conectada. Para aprender bien el proceso, vamos a empezar con una API REST simulada. Así nos centramos en lo importante: cómo viaja el dato y cómo lo interpreta el modelo.
+
+El objetivo es entender este camino: sensor, dato JSON, objeto BIM, visualización y validación.
+
+Fíjate en que no hablamos solo de ver un número en pantalla. La gracia está en que ese número llegue al objeto correcto y que el modelo pueda reaccionar.
+
+Esa es la base de un gemelo digital: geometría, identidad, datos vivos y reglas.
+
+En esta lección tenemos una escena sencilla con dos salas: la A-101 y la A-102.
+
+Cada sala consulta su propio dato de CO dos, lo muestra en un panel y cambia de color según el valor recibido.
+
+Además, añadimos dos estados de control: si el sensor está offline, la sala se pone gris; y si el dato no pertenece a esa sala, se pone morada.
+
+Esto último es importante porque nos mete en un tema clave: la confianza del dato.
+
+Aquí vemos una respuesta típica de nuestra API.
+
+La API devuelve información de una sala concreta: nombre de la sala, identificador IFC simulado, temperatura, CO dos, hora de la medición y estado del sensor.
+
+Este formato se llama JSON. Puedes verlo como una forma ordenada de mandar datos entre sistemas.
+
+Por ahora no necesitamos dominar programación. Solo necesitamos entender que BIMROCKET va a leer estos campos.
+
+Este es el flujo completo.
+
+Primero tenemos el sensor simulado. Ese sensor publica datos a través de una API REST.
+
+BIMROCKET llama a esa API mediante un controlador. El controlador recibe JSON. Después, otras partes del objeto usan ese JSON para mostrar valores, cambiar colores o comprobar si el dato es confiable.
+
+Si entiendes este dibujo, entiendes la columna vertebral de la lección.
+

@@ -1,0 +1,38 @@
+Aquí viene una idea muy importante.
+
+No basta con que una API nos dé un número de CO dos. Necesitamos saber a qué objeto BIM pertenece ese número.
+
+Si no, podríamos estar coloreando la sala equivocada.
+
+Por eso hablamos de identidad BIM más identidad IoT.
+
+En esta captura está seleccionada la sala A-101.
+
+Abajo, en el inspector, vemos sus propiedades propias: room e ifcGlobalId.
+
+El campo room es el que usaremos para pedir el dato correcto a la API.
+
+La idea es sencilla: antes de pedir datos externos, el objeto BIM tiene que saber quién es.
+
+Ahora estamos viendo la A-102.
+
+La estructura es la misma, pero los valores son distintos.
+
+Esto es importante porque no queremos construir una solución artesanal para cada sala. Queremos una lógica reutilizable.
+
+La misma regla debe servir para A-101, A-102 y, más adelante, para muchas más salas.
+
+En este punto ya tenemos objetos con identidad.
+
+Ahora necesitamos traer datos vivos.
+
+BIMROCKET lo hace preguntando cada cierto tiempo a una dirección web. Esa dirección devuelve el JSON con la lectura actual.
+
+Aquí aparece el RestPollController de la A-101.
+
+Este controlador consulta una URL concreta: la dirección de la API para la sala A-101.
+
+Fíjate también en el campo output. Ahí vemos la respuesta que ha recibido BIMROCKET: sala, identificador, temperatura, CO dos, hora y estado.
+
+Es decir: BIMROCKET ya tiene dentro del objeto la lectura viva del sensor.
+

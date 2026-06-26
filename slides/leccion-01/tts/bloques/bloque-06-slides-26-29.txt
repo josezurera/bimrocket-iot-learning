@@ -1,0 +1,30 @@
+La tercera prueba fuerza una identidad incorrecta.
+
+Hacemos que la fórmula compare contra una sala falsa, A-999.
+
+El resultado esperado es que iotMatch sea falso y la sala se ponga morada.
+
+Esta prueba demuestra que el modelo no acepta cualquier dato sin comprobarlo.
+
+El archivo final queda guardado como referencia del laboratorio.
+
+Contiene dos salas conectadas, URL dinámica, paneles de CO dos, validación de identidad y reglas visuales.
+
+Este archivo es importante porque nos permite retomar el curso desde otro equipo sin perder el estado del aprendizaje.
+
+La idea de cierre es esta:
+
+un gemelo digital no es solo un modelo 3D.
+
+Es geometría más identidad, más datos vivos, más reglas de confianza.
+
+En esta lección hemos construido una versión mínima de esa idea.
+
+En la siguiente fase podremos cambiar el sensor simulado por un sensor real con ESP32.
+
+Y esto es lo bonito: la lógica aprendida se mantiene.
+
+Solo cambia la fuente del dato.
+
+Hoy el dato viene de Python. Mañana puede venir de una placa física conectada por WiFi.
+

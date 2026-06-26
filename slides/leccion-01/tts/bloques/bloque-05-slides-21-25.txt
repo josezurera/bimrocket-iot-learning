@@ -1,0 +1,34 @@
+La fórmula parece larga, pero la lógica es sencilla.
+
+Primero preguntamos: ¿el dato no coincide con la sala? Si no coincide, morado.
+
+Si sí coincide, preguntamos: ¿el sensor está offline? Si está offline, gris.
+
+Y si ninguna de esas dos cosas ocurre, usamos la escala normal de CO dos.
+
+Esta tabla resume la regla.
+
+Primero va la identidad incorrecta, porque es el fallo más grave.
+
+Después va el estado offline, porque no tenemos dato vivo.
+
+Y por último va la escala de CO dos, que solo tiene sentido cuando el dato es válido.
+
+No basta con configurar.
+
+Hay que probar los estados importantes.
+
+En sistemas IoT, una parte del trabajo consiste en comprobar qué pasa cuando todo va bien, pero también qué pasa cuando algo falla.
+
+La primera prueba es el caso normal.
+
+El sensor está online, la identidad coincide y la sala se colorea según el CO dos.
+
+Este es el comportamiento esperado cuando todo funciona.
+
+Después forzamos el estado offline añadiendo un parámetro temporal a la URL.
+
+Esto nos permite comprobar que BIMROCKET detecta el estado y cambia el color a gris.
+
+Así sabemos que el modelo no solo responde a valores de CO dos, sino también al estado de disponibilidad del sensor.
+

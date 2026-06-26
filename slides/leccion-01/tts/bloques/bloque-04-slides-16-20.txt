@@ -1,0 +1,38 @@
+Aquí ya vemos el resultado en pantalla.
+
+La sala A-101 tiene su panel de CO dos y muestra la lectura actual en ppm.
+
+Esto parece sencillo, pero conceptualmente es un salto importante: la sala ya no es solo geometría. Ahora está mostrando información viva.
+
+Ahora damos un paso más.
+
+Un dato puede llegar correctamente y aun así no ser confiable.
+
+Por ejemplo, imagina que una sala recibe por error la medición de otra sala. El número existe, pero no debemos usarlo para colorear ese objeto.
+
+Por eso añadimos una validación.
+
+iotMatch compara dos cosas.
+
+Por un lado, la sala que el objeto cree ser: object punto userData punto room.
+
+Por otro lado, la sala que viene en la respuesta de la API: jsonOutput punto room.
+
+Si ambas coinciden, el dato pertenece al objeto. Si no coinciden, marcamos el dato como no confiable.
+
+Aquí vemos esa comparación dentro de BIMROCKET.
+
+La fórmula comprueba si la sala guardada en el objeto coincide con la sala recibida desde la API.
+
+Esta comprobación es pequeña, pero conceptualmente es enorme: evita que el modelo acepte cualquier dato sin preguntarse si pertenece al objeto correcto.
+
+Usamos tres estados visuales.
+
+Verde a rojo cuando el dato es válido y representa el nivel de CO dos.
+
+Gris cuando el sensor está offline.
+
+Morado cuando la identidad no coincide y, por tanto, no confiamos en el dato.
+
+Esta prioridad evita confusiones.
+

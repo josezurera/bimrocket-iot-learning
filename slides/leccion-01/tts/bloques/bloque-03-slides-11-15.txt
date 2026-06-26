@@ -1,0 +1,34 @@
+Ahora vemos lo mismo, pero para la A-102.
+
+La lógica es idéntica. Lo que cambia es la sala consultada.
+
+Esta es una de las ideas más importantes del laboratorio: cada objeto BIM pregunta por su propio dato.
+
+La URL dinámica es una fórmula muy simple.
+
+Tenemos una parte fija, que es la dirección base de la API, y luego añadimos el identificador de la sala actual.
+
+En JavaScript, el símbolo más sirve aquí para unir texto.
+
+Así BIMROCKET construye automáticamente la URL correcta para cada objeto.
+
+Aquí ya no estamos viendo solo un dibujo conceptual. Estamos viendo la fórmula real dentro de BIMROCKET.
+
+La sala seleccionada es A-102 y el inspector está en la pestaña de fórmulas.
+
+La clave es que la URL no contiene A-102 escrito a mano. Usa object punto userData punto room.
+
+Eso permite que la misma fórmula funcione también para A-101.
+
+Leer un dato no basta.
+
+Si el usuario no lo ve o el modelo no reacciona, el dato todavía no está aportando valor.
+
+Por eso el siguiente paso es mostrar el CO dos dentro de BIMROCKET.
+
+En esta fórmula tomamos el campo co2 de la respuesta JSON.
+
+object punto controllers punto ctr guion bajo cero punto jsonOutput punto co2 significa: entra en el controlador REST, mira su salida JSON y toma el valor de CO dos.
+
+Ese valor se envía al controlador que muestra el panel de texto.
+
