@@ -23,6 +23,8 @@ Voz: Algieba
 
 ## Instrucciones
 
+### Opción A — Manual desde Google AI Studio
+
 1. Copia un bloque completo.
 2. Pégalo en Google AI Studio TTS.
 3. Selecciona la voz `Algieba`.
@@ -39,7 +41,25 @@ audio/leccion-01-bloque-05-algieba.wav
 audio/leccion-01-bloque-06-algieba.wav
 ```
 
+### Opción B — Automática por API
+
+Desde la raíz del repositorio:
+
+```powershell
+cd C:\Users\josez\bimrocket-iot-learning
+$env:GEMINI_API_KEY="TU_API_KEY"
+python scripts/generate_tts_gemini.py
+```
+
+Para regenerar solo un bloque:
+
+```powershell
+python scripts/generate_tts_gemini.py --only 01 --force
+```
+
+La API key se lee desde la variable de entorno local `GEMINI_API_KEY`.  
+No debe guardarse en archivos del repositorio.
+
 ## Nota de pronunciación
 
 En los textos se usa `CO dos` en algunos puntos para evitar que la voz lea mal `CO₂`.
-
