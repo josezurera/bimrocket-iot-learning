@@ -12,49 +12,55 @@ tags:
 
 ## Punto alcanzado
 
-Ya se completó la primera conexión práctica entre un sensor REST simulado y
-BIMROCKET.
+Ya se completó la conexión práctica entre un sensor REST simulado y BIMROCKET.
 
 Se consiguió:
 
 - ejecutar una API local en `http://127.0.0.1:8001`;
-- obtener lecturas JSON de la sala `A-101`;
+- obtener lecturas JSON de varias salas;
 - diferenciar estados `online` y `offline`;
 - abrir BIMROCKET desde `http://127.0.0.1:8000/app.html`;
-- crear una caja que representa la sala `Sala_A-101`;
-- añadir un `RestPollController`;
-- conectar ese controlador con:
-
-  ```text
-  http://127.0.0.1:8001/api/rooms/A-101
-  ```
-
-- recibir datos en `output` y `jsonOutput`;
-- añadir un `DisplayController` como `ctr_1`;
-- crear fórmulas para conectar `ctr_0.jsonOutput.co2` con
-  `ctr_1.input`;
-- mostrar el CO₂ en un panel visual como `ppm`;
-- añadir un `ColorController`;
-- colorear la sala según el CO₂;
-- representar el estado `offline` con color gris.
+- crear un modelo con dos salas dentro de `Edificio_Demo`;
+- añadir un `RestPollController` por sala;
+- añadir un `DisplayController` por sala;
+- añadir un `ColorController` por sala;
+- mostrar el CO₂ en paneles visuales como `ppm`;
+- colorear cada sala según el CO₂;
+- representar el estado `offline` con color gris;
+- validar que el dato IoT recibido pertenece a la sala BIM correcta.
 
 ## Punto actual
 
-Además de mostrar y colorear el CO₂, ya se ha preparado el siguiente patrón:
+El mejor punto de partida actual es:
 
-- la sala tiene identidad propia en `userData`;
-- `userData.room` vale `A-101`;
-- `userData.ifcGlobalId` vale `DEMO_IFC_GLOBAL_ID_A101`;
-- la URL de `RestPollController` puede construirse desde esa identidad:
+```text
+examples/bimrocket-models/lab-03-dos-salas-iot.brf
+```
 
-  ```javascript
-  "http://127.0.0.1:8001/api/rooms/" + object.userData.room
-  ```
+Ese modelo contiene:
 
-Esto permite pasar de una prueba con una sala a un patrón reutilizable para
-varias salas.
+```text
+Edificio_Demo
+├── Sala_A-101
+└── Sala_A-102
+```
 
-La API simulada también se ha ampliado para soportar varias salas:
+Cada sala tiene identidad propia:
+
+```text
+userData.room
+userData.ifcGlobalId
+```
+
+Y la URL del `RestPollController` se construye desde esa identidad:
+
+```javascript
+"http://127.0.0.1:8001/api/rooms/" + object.userData.room
+```
+
+## API simulada disponible
+
+La API simulada soporta estas rutas:
 
 ```text
 http://127.0.0.1:8001/api/rooms/A-101
@@ -62,19 +68,19 @@ http://127.0.0.1:8001/api/rooms/A-102
 http://127.0.0.1:8001/api/rooms/A-103
 ```
 
-Si el sensor estaba arrancado antes de este cambio, hay que reiniciarlo para que
-reconozca `A-102` y `A-103`.
-
-También se ha preparado un modelo BIMROCKET con dos salas:
+También existe:
 
 ```text
-examples/bimrocket-models/lab-03-dos-salas-iot.brf
+http://127.0.0.1:8001/api/rooms
 ```
 
-Este modelo permite comprobar que la misma fórmula de URL dinámica funciona en
-dos objetos BIM distintos.
+para listar las salas simuladas.
 
-El avance más reciente fue añadir una validación de identidad IoT:
+Si el sensor estaba arrancado antes de los últimos cambios, hay que reiniciarlo.
+
+## Validación de identidad IoT
+
+El modelo ya incluye esta fórmula en `A-101` y `A-102`:
 
 ```javascript
 object.userData.room === object.controllers.ctr_0.jsonOutput.room
@@ -86,42 +92,62 @@ El resultado se guarda en:
 userData.iotMatch
 ```
 
-Si `iotMatch` vale `true`, el dato recibido pertenece a la sala seleccionada.
-Si vale `false`, llega un dato que no coincide con la identidad esperada del
-objeto BIM.
-
-## Nombre real del controlador usado
-
-El controlador quedó con nombre automático:
+Interpretación:
 
 ```text
-ctr_0
+iotMatch = true  -> el dato recibido pertenece a la sala
+iotMatch = false -> el dato recibido no coincide con la identidad de la sala
 ```
 
-Por tanto, para leer el CO₂ en una fórmula de BIMROCKET hay que usar:
+## Regla visual actual
+
+El color de cada sala sigue esta prioridad:
+
+```text
+iotMatch false -> morado
+status offline -> gris
+todo correcto -> color según CO₂
+```
+
+Esto significa que la confianza del dato tiene prioridad sobre el valor de CO₂.
+
+## Nombre real de los controladores usados
+
+En cada sala se usan estos nombres:
+
+```text
+ctr_0 = RestPollController
+ctr_1 = DisplayController
+co2_color = ColorController
+```
+
+Para leer el CO₂ en una fórmula:
 
 ```javascript
 object.controllers.ctr_0.jsonOutput.co2
 ```
 
-Si en otro intento el controlador se llama de otra manera, sustituye `ctr_0`
-por el nombre real que aparezca en el inspector.
+Para leer la sala recibida desde la API:
+
+```javascript
+object.controllers.ctr_0.jsonOutput.room
+```
 
 ## Conceptos aclarados
 
-La sesión del 25 de junio de 2026 dejó documentados estos conceptos:
+Ya se han documentado estos conceptos:
 
 - qué es `RestPollController`;
-- por qué se usa para consultar APIs REST de IoT;
 - qué diferencia hay entre `output` y `jsonOutput`;
 - qué significa `object` en una fórmula;
-- qué significa el punto `.` como acceso a propiedades;
 - qué diferencia hay entre `path` y `expression`;
-- por qué los textos llevan comillas y los números no;
-- qué hace `.set(...)` al cambiar un color;
 - qué es `userData`;
-- por qué conviene construir la URL del sensor desde la identidad de la sala;
-- por qué puede ser necesario pulsar `Reconstruir` para evaluar fórmulas.
+- cómo construir una URL desde `object.userData.room`;
+- cómo usar `===` para comprobar identidad;
+- qué significa `true` y `false`;
+- qué diferencia hay entre `status` e `iotMatch`;
+- cómo usar `? :` como `if` compacto;
+- cómo priorizar reglas visuales: morado, gris, CO₂.
 
 Ver:
 
@@ -157,20 +183,11 @@ http://127.0.0.1:8000/app.html
 
 ## Archivos del modelo
 
-Los modelos del laboratorio ya están versionados en GitHub:
+Modelos disponibles:
 
 ```text
 examples/bimrocket-models/lab-01-sensor-rest.brf
 examples/bimrocket-models/lab-01-co2-display-color-offline.brf
 examples/bimrocket-models/lab-02-identidad-dinamica-url.brf
-examples/bimrocket-models/lab-03-dos-salas-iot.brf
-```
-
-Para continuar desde otro equipo, clona el repositorio, arranca el sensor y
-BIMROCKET, y abre el `.brf` correspondiente desde **Abrir del disco local**.
-
-El mejor punto de partida actual es:
-
-```text
 examples/bimrocket-models/lab-03-dos-salas-iot.brf
 ```

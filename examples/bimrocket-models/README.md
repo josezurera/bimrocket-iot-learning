@@ -61,6 +61,12 @@ Estado con dos salas conectadas al sensor:
   "http://127.0.0.1:8001/api/rooms/" + object.userData.room
   ```
 
+- ambas tienen `userData.iotMatch` para comprobar que el dato recibido pertenece
+  a la sala;
+- si `iotMatch` es `false`, la sala se pinta de morado;
+- si `status` es `offline`, la sala se pinta de gris;
+- si todo es coherente, la sala se pinta según el CO₂.
+
 ## Cómo usarlos
 
 1. Arranca el sensor:

@@ -47,7 +47,7 @@ La red puede funcionar, el sensor puede estar `online`, y aun así el dato puede
 
 ## Fórmula creada
 
-Añadimos una fórmula en `Sala_A-102`.
+La fórmula se añadió primero en `Sala_A-102` y después se dejó preparada también en `Sala_A-101`.
 
 Path:
 
@@ -187,10 +187,34 @@ leer dato → comprobar identidad → mostrar dato → pintar sala
 
 Este es un paso hacia un modelo más robusto: no se trata solo de visualizar datos, sino de comprobar si son confiables para el objeto BIM seleccionado.
 
-## Siguiente paso natural
+## Regla visual aplicada al modelo
 
-Usar `iotMatch` en las reglas visuales:
+El archivo:
 
-- si `status = "offline"`, pintar gris;
-- si `iotMatch = false`, pintar con un color de alerta;
-- si todo está bien, pintar según el valor de CO₂.
+```text
+examples/bimrocket-models/lab-03-dos-salas-iot.brf
+```
+
+queda actualizado con la misma lógica en `Sala_A-101` y `Sala_A-102`.
+
+La prioridad visual es:
+
+```text
+1. iotMatch = false → morado
+2. status = "offline" → gris
+3. todo correcto → color según CO₂
+```
+
+Para `minColor`, la fórmula guardada es:
+
+```javascript
+!object.userData.iotMatch ? object.controllers.co2_color.minColor.set(0x8000ff) : object.controllers.ctr_0.jsonOutput.status === "offline" ? object.controllers.co2_color.minColor.set(0x808080) : object.controllers.co2_color.minColor.set(0x00aa00)
+```
+
+Para `maxColor`, la fórmula guardada es:
+
+```javascript
+!object.userData.iotMatch ? object.controllers.co2_color.maxColor.set(0x8000ff) : object.controllers.ctr_0.jsonOutput.status === "offline" ? object.controllers.co2_color.maxColor.set(0x808080) : object.controllers.co2_color.maxColor.set(0xff0000)
+```
+
+Así, cuando hay incoherencia de identidad, los dos extremos de la escala se vuelven morados y el valor de CO₂ deja de dominar el color.
