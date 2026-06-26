@@ -18,6 +18,13 @@ Validar si la voz sirve para un curso técnico monetizable:
 - `criterios-evaluacion.md`: checklist para decidir si una voz sirve.
 - `prompt-voz.md`: descripción de la voz deseada.
 - `audio/`: carpeta prevista para guardar audios exportados.
+- `evaluaciones/`: fichas de evaluación por voz probada.
+
+## Muestras generadas
+
+| Archivo | Herramienta | Voz | Estado |
+|---|---|---|---|
+| `audio/google-ai-studio-zephyr-01.wav` | Google AI Studio | Zephyr | Pendiente de evaluación auditiva |
 
 ## Flujo recomendado
 
@@ -37,4 +44,3 @@ audio/elevenlabs-voz-01.mp3
 ```
 
 No subas audios definitivos al repositorio si son muy pesados o si contienen restricciones de licencia. Para pruebas pequeñas sí puede ser útil guardarlos localmente.
-
