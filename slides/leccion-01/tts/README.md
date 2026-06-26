@@ -25,6 +25,7 @@ Validar si la voz sirve para un curso técnico monetizable:
 | Archivo | Herramienta | Voz | Estado |
 |---|---|---|---|
 | `audio/google-ai-studio-zephyr-01.wav` | Google AI Studio | Zephyr | Pendiente de evaluación auditiva |
+| `audio/google-ai-studio-voz-02.wav` | Google AI Studio | Pendiente de identificar | Pendiente de evaluación auditiva |
 
 ## Flujo recomendado
 
