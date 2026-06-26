@@ -25,7 +25,26 @@ Validar si la voz sirve para un curso técnico monetizable:
 | Archivo | Herramienta | Voz | Estado |
 |---|---|---|---|
 | `audio/google-ai-studio-zephyr-01.wav` | Google AI Studio | Zephyr | Pendiente de evaluación auditiva |
-| `audio/google-ai-studio-voz-02.wav` | Google AI Studio | Pendiente de identificar | Pendiente de evaluación auditiva |
+| `audio/google-ai-studio-voz-02.wav` | Google AI Studio | Algieba | Seleccionada para producción |
+
+## Voz seleccionada
+
+La muestra seleccionada para continuar la producción de la lección 1 es:
+
+```text
+audio/google-ai-studio-voz-02.wav
+```
+
+Motivo:
+
+- mejor encaje subjetivo para el curso;
+- misma duración y formato que la muestra inicial;
+- válida para avanzar con pruebas de montaje.
+
+Pendiente:
+
+- documentar la voz Algieba como referencia para futuras generaciones;
+- confirmar condiciones de uso comercial antes de publicar el curso monetizado.
 
 ## Flujo recomendado
 

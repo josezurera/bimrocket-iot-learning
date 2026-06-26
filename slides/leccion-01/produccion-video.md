@@ -59,6 +59,15 @@ Opciones posibles:
 
 Para monetización, la opción más segura es usar voz humana propia o una voz sintética con licencia comercial clara.
 
+Para la lección 1 se ha seleccionado como primera voz de trabajo:
+
+```text
+slides/leccion-01/tts/audio/google-ai-studio-voz-02.wav
+```
+
+La voz procede de Google AI Studio con Gemini 3.1 Flash TTS Preview.  
+Antes de publicar contenido monetizado, confirmar las condiciones de uso comercial aplicables a la cuenta y al servicio concreto usado.
+
 Codex puede ayudar a preparar:
 
 - texto final por escena;
@@ -129,4 +138,3 @@ Para esta primera lección, recomiendo:
 - cierre preparando el salto al ESP32.
 
 Así queda suficientemente profesional sin complicar demasiado el primer montaje.
-
