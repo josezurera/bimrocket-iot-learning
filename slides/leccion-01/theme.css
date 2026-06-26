@@ -1,0 +1,153 @@
+/* @theme bimingenieros */
+
+@import 'default';
+
+:root {
+  --bi-navy: #102f45;
+  --bi-blue: #0e6b9f;
+  --bi-red: #c94132;
+  --bi-orange: #f28c28;
+  --bi-bg: #f6f8fa;
+  --bi-text: #1f2933;
+  --bi-muted: #64748b;
+}
+
+section {
+  background: var(--bi-bg);
+  color: var(--bi-text);
+  font-family: "Segoe UI", "Aptos", Arial, sans-serif;
+  letter-spacing: -0.01em;
+  padding: 64px 72px;
+}
+
+section::after {
+  color: var(--bi-muted);
+  font-size: 18px;
+}
+
+h1, h2, h3 {
+  color: var(--bi-navy);
+  font-weight: 800;
+}
+
+h1 {
+  font-size: 54px;
+  line-height: 1.04;
+}
+
+h2 {
+  font-size: 42px;
+}
+
+p, li {
+  font-size: 28px;
+}
+
+strong {
+  color: var(--bi-blue);
+}
+
+code {
+  font-family: "Cascadia Code", Consolas, monospace;
+}
+
+pre {
+  background: #ffffff;
+  border: 1px solid #d6dee6;
+  border-left: 8px solid var(--bi-blue);
+  border-radius: 12px;
+  padding: 22px;
+}
+
+table {
+  font-size: 24px;
+}
+
+th {
+  background: var(--bi-navy);
+  color: white;
+}
+
+td {
+  background: white;
+}
+
+.brand {
+  color: var(--bi-red);
+  font-weight: 800;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+
+.kicker {
+  color: var(--bi-blue);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: 24px;
+}
+
+.subtitle {
+  color: var(--bi-muted);
+  font-size: 30px;
+}
+
+.accent {
+  color: var(--bi-orange);
+}
+
+.small {
+  font-size: 22px;
+  color: var(--bi-muted);
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 42px;
+  align-items: center;
+}
+
+.card {
+  background: white;
+  border: 1px solid #d6dee6;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(16, 47, 69, 0.08);
+}
+
+section.hero {
+  background:
+    linear-gradient(110deg, rgba(16, 47, 69, 0.96), rgba(14, 107, 159, 0.88)),
+    radial-gradient(circle at 85% 20%, rgba(242, 140, 40, 0.36), transparent 30%);
+  color: white;
+}
+
+section.hero h1,
+section.hero h2,
+section.hero p {
+  color: white;
+}
+
+section.hero .brand {
+  color: #ffffff;
+}
+
+section.section-title {
+  background: var(--bi-navy);
+  color: white;
+}
+
+section.section-title h1,
+section.section-title p {
+  color: white;
+}
+
+section.section-title h1::after {
+  content: "";
+  display: block;
+  width: 140px;
+  height: 8px;
+  background: var(--bi-orange);
+  margin-top: 28px;
+}

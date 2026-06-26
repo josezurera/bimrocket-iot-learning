@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#f6f8fa"/>
+  <text x="90" y="110" font-family="Segoe UI, Arial" font-size="48" font-weight="700" fill="#102f45">Estados visuales del dato</text>
+  <g transform="translate(90,190)">
+    <rect width="430" height="500" rx="28" fill="#ffffff" stroke="#d6dee6" stroke-width="2"/>
+    <rect width="430" height="46" fill="#00aa00"/>
+    <text x="32" y="110" font-family="Segoe UI, Arial" font-size="32" font-weight="700" fill="#102f45">Todo correcto</text>
+    <text x="32" y="185" font-family="Consolas, monospace" font-size="25" fill="#1f2933">status = online</text>
+    <text x="32" y="235" font-family="Consolas, monospace" font-size="25" fill="#1f2933">iotMatch = true</text>
+    <text x="32" y="285" font-family="Consolas, monospace" font-size="25" fill="#1f2933">color según CO₂</text>
+  </g>
+  <g transform="translate(585,190)">
+    <rect width="430" height="500" rx="28" fill="#ffffff" stroke="#d6dee6" stroke-width="2"/>
+    <rect width="430" height="46" fill="#808080"/>
+    <text x="32" y="110" font-family="Segoe UI, Arial" font-size="32" font-weight="700" fill="#102f45">Sensor offline</text>
+    <text x="32" y="185" font-family="Consolas, monospace" font-size="25" fill="#1f2933">status = offline</text>
+    <text x="32" y="235" font-family="Consolas, monospace" font-size="25" fill="#1f2933">iotMatch = true</text>
+    <text x="32" y="285" font-family="Consolas, monospace" font-size="25" fill="#1f2933">gris</text>
+  </g>
+  <g transform="translate(1080,190)">
+    <rect width="430" height="500" rx="28" fill="#ffffff" stroke="#d6dee6" stroke-width="2"/>
+    <rect width="430" height="46" fill="#8000ff"/>
+    <text x="32" y="110" font-family="Segoe UI, Arial" font-size="32" font-weight="700" fill="#102f45">Identidad incorrecta</text>
+    <text x="32" y="185" font-family="Consolas, monospace" font-size="25" fill="#1f2933">iotMatch = false</text>
+    <text x="32" y="235" font-family="Consolas, monospace" font-size="25" fill="#1f2933">morado</text>
+    <text x="32" y="285" font-family="Consolas, monospace" font-size="25" fill="#1f2933">prioridad máxima</text>
+  </g>
+  <text x="90" y="785" font-family="Segoe UI, Arial" font-size="34" fill="#c94132">Prioridad: morado → gris → CO₂</text>
+</svg>
