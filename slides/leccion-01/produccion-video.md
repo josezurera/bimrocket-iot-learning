@@ -110,6 +110,30 @@ Herramientas posibles:
 
 Con FFmpeg se puede automatizar mucho, pero para monetización conviene revisar manualmente ritmo, silencios y transiciones.
 
+Para la lección 1 existe un script de montaje automático:
+
+```powershell
+cd C:\Users\josez\bimrocket-iot-learning
+.\scripts\build-lesson1-video.ps1
+```
+
+El script genera:
+
+```text
+slides/leccion-01/media/final/leccion-01.mp4
+```
+
+La sincronización inicial es por bloques:
+
+```text
+slides 01–05 → audio bloque 01
+slides 06–10 → audio bloque 02
+slides 11–15 → audio bloque 03
+slides 16–20 → audio bloque 04
+slides 21–25 → audio bloque 05
+slides 26–29 → audio bloque 06
+```
+
 ### Fase 5 — Publicación
 
 Formatos recomendados:
