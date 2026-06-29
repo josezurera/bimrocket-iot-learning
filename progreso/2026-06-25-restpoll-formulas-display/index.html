@@ -1,0 +1,2017 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Curso práctico sobre BIMROCKET, IoT y edificios conectados">
+      
+      
+        <meta name="author" content="José Zurera">
+      
+      
+      
+        <link rel="prev" href="../2026-06-24-leccion-1/">
+      
+      
+        <link rel="next" href="../2026-06-25-identidad-bim-iot/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>2026-06-25 — RestPollController, fórmulas y DisplayController - BIMROCKET IoT Learning</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2026-06-25-restpollcontroller-formulas-y-displaycontroller" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="BIMROCKET IoT Learning" class="md-header__button md-logo" aria-label="BIMROCKET IoT Learning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BIMROCKET IoT Learning
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2026-06-25 — RestPollController, fórmulas y DisplayController
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartir" aria-label="Compartir" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/josezurera/bimrocket-iot-learning" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    josezurera/bimrocket-iot-learning
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BIMROCKET IoT Learning" class="md-nav__button md-logo" aria-label="BIMROCKET IoT Learning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    BIMROCKET IoT Learning
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/josezurera/bimrocket-iot-learning" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    josezurera/bimrocket-iot-learning
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Empezar
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Empezar
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-empezar/continuar-en-otro-equipo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Continuar en otro equipo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Itinerario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-fundamentos/01-del-sensor-al-modelo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lección 1: del sensor al modelo
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--completada"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-fundamentos/resumen-leccion-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen lección 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIMROCKET
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BIMROCKET
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-bimrocket/arquitectura-iot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura IoT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboratorios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Laboratorios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-laboratorios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-laboratorios/01-sensor-rest-simulado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboratorio 1: sensor REST simulado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Código fuente
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Código fuente
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-codigo-fuente/mapa-de-clases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mapa de clases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración real
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integración real
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-integracion-real/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glosario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progreso
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progreso
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estado-actual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estado actual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2026-06-24-leccion-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-24 — Lección 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-25 — RestPollController, fórmulas y DisplayController
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-25 — RestPollController, fórmulas y DisplayController
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen de la sesión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-simula-el-sensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué simula el sensor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-restpollcontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué es RestPollController
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-frente-a-jsonoutput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output frente a jsonOutput
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conceptos-base-de-las-formulas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conceptos base de las fórmulas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-significa-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué significa object
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-significa-el-punto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué significa el punto .
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formula-principal-creada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fórmula principal creada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-path-no-empieza-por-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por qué path no empieza por object
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#texto-numeros-y-comillas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Texto, números y comillas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-displaycontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué es DisplayController
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trampa-importante-descubierta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trampa importante descubierta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultado-conseguido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultado conseguido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frase-para-recordar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frase para recordar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximo-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximo paso
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2026-06-25-identidad-bim-iot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-25 — Identidad BIM y URL dinámica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2026-06-25-api-multisala/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-25 — API IoT multisala
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2026-06-25-dos-salas-iot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-25 — Dos salas BIM conectadas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2026-06-26-validacion-identidad-iot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-26 — Validación de identidad IoT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Preguntas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plantillas/leccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plantilla de lección
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--borrador"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen de la sesión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-simula-el-sensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué simula el sensor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-restpollcontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué es RestPollController
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-frente-a-jsonoutput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output frente a jsonOutput
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conceptos-base-de-las-formulas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conceptos base de las fórmulas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-significa-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué significa object
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-significa-el-punto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué significa el punto .
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formula-principal-creada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fórmula principal creada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-path-no-empieza-por-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por qué path no empieza por object
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#texto-numeros-y-comillas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Texto, números y comillas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-displaycontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué es DisplayController
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trampa-importante-descubierta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trampa importante descubierta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultado-conseguido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultado conseguido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frase-para-recordar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frase para recordar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximo-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximo paso
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">displaycontroller</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">formulas</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">iot</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">progreso</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">restpollcontroller</span>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+<h1 id="2026-06-25-restpollcontroller-formulas-y-displaycontroller">2026-06-25 — RestPollController, fórmulas y DisplayController<a class="headerlink" href="#2026-06-25-restpollcontroller-formulas-y-displaycontroller" title="Permanent link">&para;</a></h1>
+<h2 id="resumen-de-la-sesion">Resumen de la sesión<a class="headerlink" href="#resumen-de-la-sesion" title="Permanent link">&para;</a></h2>
+<p>En esta sesión conectamos el dato de CO₂ recibido desde el sensor REST simulado
+con un panel visual dentro de BIMROCKET.</p>
+<p>El flujo logrado fue:</p>
+<pre class="mermaid"><code>flowchart LR
+    API["server.py&lt;br/&gt;API REST simulada"]
+    RP["ctr_0&lt;br/&gt;RestPollController"]
+    JSON["jsonOutput.co2"]
+    F["Fórmula"]
+    D["ctr_1&lt;br/&gt;DisplayController"]
+    P["Panel&lt;br/&gt;987 ppm"]
+
+    API --&gt; RP
+    RP --&gt; JSON
+    JSON --&gt; F
+    F --&gt; D
+    D --&gt; P</code></pre>
+<h2 id="que-simula-el-sensor">Qué simula el sensor<a class="headerlink" href="#que-simula-el-sensor" title="Permanent link">&para;</a></h2>
+<p>El archivo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>examples/mock-sensor/server.py
+</code></pre></div>
+<p>simula una API IoT local. No tenemos todavía un sensor físico real, así que
+este programa hace de sustituto.</p>
+<p>En un edificio real podríamos tener:</p>
+<pre class="mermaid"><code>flowchart LR
+    Sensor["Sensor físico CO₂"]
+    Gateway["Gateway / BMS / plataforma IoT"]
+    Api["API REST"]
+    Bimrocket["BIMROCKET"]
+
+    Sensor --&gt; Gateway --&gt; Api --&gt; Bimrocket</code></pre>
+<p>En el laboratorio lo simplificamos así:</p>
+<pre class="mermaid"><code>flowchart LR
+    Python["server.py"]
+    Api["http://127.0.0.1:8001/api/rooms/A-101"]
+    Bimrocket["BIMROCKET"]
+
+    Python --&gt; Api --&gt; Bimrocket</code></pre>
+<p>La API devuelve una lectura con esta forma:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;room&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A-101&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">&quot;ifcGlobalId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DEMO_IFC_GLOBAL_ID_A101&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">24.3</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">&quot;co2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">987</span><span class="p">,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-06-25T17:49:37+00:00&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;online&quot;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span>
+</code></pre></div>
+<p>Los valores cambian porque <code>server.py</code> genera una lectura nueva cada vez que
+BIMROCKET consulta la URL.</p>
+<h2 id="que-es-restpollcontroller">Qué es RestPollController<a class="headerlink" href="#que-es-restpollcontroller" title="Permanent link">&para;</a></h2>
+<p><code>RestPollController</code> es el controlador de BIMROCKET que consulta una URL REST
+de forma repetida.</p>
+<p>Descomposición del nombre:</p>
+<ul>
+<li><code>REST</code>: una URL HTTP que devuelve datos estructurados.</li>
+<li><code>Poll</code>: consultar periódicamente, una y otra vez.</li>
+<li><code>Controller</code>: componente añadido a un objeto BIM para darle comportamiento.</li>
+</ul>
+<p>En nuestro modelo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ctr_0 = RestPollController
+</code></pre></div>
+<p>Su trabajo es:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>cada 10 segundos
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>↓
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>hacer GET a http://127.0.0.1:8001/api/rooms/A-101
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>↓
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>recibir JSON
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>↓
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>guardar la respuesta en output
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>↓
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>guardar la respuesta parseada en jsonOutput
+</code></pre></div>
+<p>Propiedades importantes:</p>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>Dirección REST que consulta.</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>Método HTTP; en el laboratorio usamos <code>GET</code>.</td>
+</tr>
+<tr>
+<td><code>pollInterval</code></td>
+<td>Cada cuántos segundos consulta la URL.</td>
+</tr>
+<tr>
+<td><code>output</code></td>
+<td>Respuesta recibida como texto.</td>
+</tr>
+<tr>
+<td><code>jsonOutput</code></td>
+<td>Respuesta JSON convertida en datos consultables.</td>
+</tr>
+<tr>
+<td><code>started</code></td>
+<td>Indica si el controlador está arrancado; es de solo lectura.</td>
+</tr>
+<tr>
+<td><code>autoStart</code></td>
+<td>Permite que el controlador arranque al cargar el modelo.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="output-frente-a-jsonoutput">Output frente a jsonOutput<a class="headerlink" href="#output-frente-a-jsonoutput" title="Permanent link">&para;</a></h2>
+<p>Si la API devuelve:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;co2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">987</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">24.3</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
+</code></pre></div>
+<p>Entonces <code>output</code> contiene el texto completo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>{&quot;co2&quot;:987,&quot;temperature&quot;:24.3}
+</code></pre></div>
+<p>Pero <code>jsonOutput</code> permite entrar directamente en cada campo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nx">object</span><span class="p">.</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">ctr_0</span><span class="p">.</span><span class="nx">jsonOutput</span><span class="p">.</span><span class="nx">co2</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nx">object</span><span class="p">.</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">ctr_0</span><span class="p">.</span><span class="nx">jsonOutput</span><span class="p">.</span><span class="nx">temperature</span>
+</code></pre></div>
+<p>Para fórmulas es más cómodo usar <code>jsonOutput</code>, porque podemos tomar un dato
+concreto sin procesar todo el texto.</p>
+<h2 id="conceptos-base-de-las-formulas">Conceptos base de las fórmulas<a class="headerlink" href="#conceptos-base-de-las-formulas" title="Permanent link">&para;</a></h2>
+<p>Una fórmula en BIMROCKET tiene dos partes:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>path
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>expression
+</code></pre></div>
+<p>La idea mental es:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>path       = dónde quiero poner el resultado
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>expression = de dónde saco o cómo calculo el valor
+</code></pre></div>
+<p>O, en lenguaje cotidiano:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>pon este valor aquí
+</code></pre></div>
+<h2 id="que-significa-object">Qué significa object<a class="headerlink" href="#que-significa-object" title="Permanent link">&para;</a></h2>
+<p>En una fórmula, <code>object</code> representa el objeto BIM donde vive la fórmula.</p>
+<p>En el laboratorio:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>object = Sala_A-101
+</code></pre></div>
+<p>Ese objeto contiene controladores:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Sala_A-101
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>└─ controllers
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>   ├─ ctr_0
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>   └─ ctr_1
+</code></pre></div>
+<h2 id="que-significa-el-punto">Qué significa el punto <code>.</code><a class="headerlink" href="#que-significa-el-punto" title="Permanent link">&para;</a></h2>
+<p>El punto significa “entra dentro de”.</p>
+<p>Por ejemplo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nx">object</span><span class="p">.</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">ctr_0</span><span class="p">.</span><span class="nx">jsonOutput</span><span class="p">.</span><span class="nx">co2</span>
+</code></pre></div>
+<p>se lee así:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>entra en object
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>entra en controllers
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>entra en ctr_0
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>entra en jsonOutput
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>toma co2
+</code></pre></div>
+<p>Es parecido a una dirección:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Sala_A-101 / controladores / ctr_0 / jsonOutput / co2
+</code></pre></div>
+<h2 id="formula-principal-creada">Fórmula principal creada<a class="headerlink" href="#formula-principal-creada" title="Permanent link">&para;</a></h2>
+<p>Creamos esta fórmula:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>path:
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>controllers.ctr_1.input
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nx">expression</span><span class="o">:</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nx">object</span><span class="p">.</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">ctr_0</span><span class="p">.</span><span class="nx">jsonOutput</span><span class="p">.</span><span class="nx">co2</span>
+</code></pre></div>
+<p>Traducción:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>pon en el input del DisplayController
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>el CO₂ recibido por el RestPollController
+</code></pre></div>
+<p>Internamente equivale a:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nx">object</span><span class="p">.</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">ctr_1</span><span class="p">.</span><span class="nx">input</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="nx">object</span><span class="p">.</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">ctr_0</span><span class="p">.</span><span class="nx">jsonOutput</span><span class="p">.</span><span class="nx">co2</span>
+</code></pre></div>
+<h2 id="por-que-path-no-empieza-por-object">Por qué path no empieza por object<a class="headerlink" href="#por-que-path-no-empieza-por-object" title="Permanent link">&para;</a></h2>
+<p>En <code>path</code> escribimos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>controllers.ctr_1.input
+</code></pre></div>
+<p>y no:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>object.controllers.ctr_1.input
+</code></pre></div>
+<p>porque <code>path</code> ya se interpreta como una ruta dentro del objeto actual.</p>
+<p>En cambio, <code>expression</code> sí usa <code>object</code> porque es una expresión JavaScript que
+calcula el valor:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nx">object</span><span class="p">.</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">ctr_0</span><span class="p">.</span><span class="nx">jsonOutput</span><span class="p">.</span><span class="nx">co2</span>
+</code></pre></div>
+<h2 id="texto-numeros-y-comillas">Texto, números y comillas<a class="headerlink" href="#texto-numeros-y-comillas" title="Permanent link">&para;</a></h2>
+<p>En las expresiones:</p>
+<ul>
+<li>los números van sin comillas;</li>
+<li>los textos van con comillas.</li>
+</ul>
+<p>Ejemplos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="mf">0</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="mf">987</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="mf">24.3</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="s2">&quot;ppm&quot;</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="s2">&quot;online&quot;</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="s2">&quot;CO₂ sala A-101&quot;</span>
+</code></pre></div>
+<p>Por eso creamos estas fórmulas auxiliares:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>path:
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>controllers.ctr_1.units
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nx">expression</span><span class="o">:</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="s2">&quot;ppm&quot;</span>
+</code></pre></div>
+<p>y:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>path:
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>controllers.ctr_1.decimals
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="nx">expression</span><span class="o">:</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="mf">0</span>
+</code></pre></div>
+<h2 id="que-es-displaycontroller">Qué es DisplayController<a class="headerlink" href="#que-es-displaycontroller" title="Permanent link">&para;</a></h2>
+<p><code>DisplayController</code> es un controlador visual.</p>
+<p>En nuestro modelo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>ctr_1 = DisplayController
+</code></pre></div>
+<p>Muestra en un panel el valor de su propiedad:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>input
+</code></pre></div>
+<p>Si:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>input = 987
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>units = ppm
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>decimals = 0
+</code></pre></div>
+<p>entonces el panel muestra:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>987 ppm
+</code></pre></div>
+<h2 id="trampa-importante-descubierta">Trampa importante descubierta<a class="headerlink" href="#trampa-importante-descubierta" title="Permanent link">&para;</a></h2>
+<p>BIMROCKET no recalcula todas las fórmulas continuamente como una hoja de
+cálculo.</p>
+<p>Cuando <code>ctr_0</code> recibe un nuevo dato, puede actualizar fórmulas relacionadas con
+su propia ruta, pero no necesariamente todas las fórmulas del objeto.</p>
+<p>Por eso, después de crear la fórmula:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>controllers.ctr_1.input =
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>object.controllers.ctr_0.jsonOutput.co2
+</code></pre></div>
+<p>tuvimos que pulsar:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>Reconstruir
+</code></pre></div>
+<p>Ese botón ejecuta una evaluación global de fórmulas mediante
+<code>evaluateFormulas()</code>.</p>
+<p>Después de reconstruir, <code>ctr_1.input</code> recibió el valor de CO₂ correctamente.</p>
+<h2 id="resultado-conseguido">Resultado conseguido<a class="headerlink" href="#resultado-conseguido" title="Permanent link">&para;</a></h2>
+<p>Resultado visual:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>987 ppm
+</code></pre></div>
+<p>Interpretación:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>server.py simula el sensor
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>RestPollController recoge la lectura
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>jsonOutput.co2 extrae el valor de CO₂
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>la fórmula copia ese valor a DisplayController
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>DisplayController lo muestra como ppm
+</code></pre></div>
+<h2 id="frase-para-recordar">Frase para recordar<a class="headerlink" href="#frase-para-recordar" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>RestPollController trae datos desde fuera;
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>las fórmulas los conectan con propiedades internas;
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>DisplayController los muestra al usuario.
+</code></pre></div>
+<h2 id="proximo-paso">Próximo paso<a class="headerlink" href="#proximo-paso" title="Permanent link">&para;</a></h2>
+<p>El siguiente paso será usar el valor de CO₂ para cambiar el color de la sala.</p>
+<p>Idea:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>CO₂ bajo     → verde
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>CO₂ medio    → amarillo
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>CO₂ alto     → rojo
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>sensor offline → estado desconocido
+</code></pre></div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
